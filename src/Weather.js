@@ -11,11 +11,10 @@ class Weather extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.state.inputloc)
     axios.get(`http://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=1c75afc553470aa49adcadff5a51ba73&units=metric`)
     .then(res => {
         const weather = res.data;
-        console.log(weather);
+        console.log(res.data);
         this.setState({ weather: weather.weather[0], main: weather.main, data: weather });
     })
     .catch((e) => console.log(e))
@@ -45,7 +44,7 @@ class Weather extends React.Component {
                   </div>
                 <div class="weather-container"><i class="weather-icon" data-feather="sun"></i>
                     <h1 class="weather-temp">{main.temp}C</h1>
-                    <h2 style={{ display: "flex", alignItems: "center"}}class="weather-desc">{weather.main}<img src="https://openweathermap.org/img/wn/04d@2x.png"></img></h2>
+                    <h2 style={{ display: "flex", alignItems: "center"}}class="weather-desc">{weather.main}<img src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}></img></h2>
                 </div>
             </div>
             <div class="info-side">
